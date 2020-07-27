@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import styles from './IndexPage.css';
 import { Row, Col } from 'antd'
 import SideLeftCompnent from './SideLeftCompnent/index';
+import EditerComponent  from './EditerComponent/index';
 
 function IndexPage() {
   return (
@@ -14,6 +15,7 @@ function IndexPage() {
         </Col>
         <Col span={8} className={styles.box_col}>
           <h2>组件编辑区</h2>
+          <EditerComponent />
         </Col>
         <Col span={8} className={styles.box_col}>
           <h2>组件属性编辑区</h2>

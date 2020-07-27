@@ -2,7 +2,7 @@ import React from 'react';
 import { Collapse, Tag, Button} from 'antd';
 import { v4 } from 'uuid';
 import { pluginsArray, pluginsArrayTree } from '../../plugins/index';
-import { connect } from 'dva'
+import { connect } from 'dva';
 
 const Panel = Collapse.Panel;
 class SideLeftCompnent extends React.Component{
@@ -16,6 +16,7 @@ class SideLeftCompnent extends React.Component{
             payload: {
                 selectItem: {
                     ...pluginsArray[event],
+                    key: v4(),
                 }
             }
         })

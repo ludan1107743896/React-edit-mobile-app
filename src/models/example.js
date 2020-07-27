@@ -2,7 +2,9 @@
 export default {
   namespace: 'example',
   state: {
-    selectItem: {}
+    selectItem: {},
+    visourDomArray: [],
+    parentPath: ''
   },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
