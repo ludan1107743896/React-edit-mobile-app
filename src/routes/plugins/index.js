@@ -1,10 +1,19 @@
 import Button from './Button';
 
-export default [
+const pluginsArray =  {
+    Button,
+}
+
+const pluginsArrayTree = [
     {
         group_title: "表单组件",
-        com: [
+        coms: [
             Button,
         ]
     }
 ]
+
+export {
+    pluginsArray,
+    pluginsArrayTree,
+}

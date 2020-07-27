@@ -1,10 +1,9 @@
 
 export default {
-
   namespace: 'example',
-
-  state: {},
-
+  state: {
+    selectItem: {}
+  },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
     },
@@ -12,12 +11,15 @@ export default {
 
   effects: {
     *fetch({ payload }, { call, put }) {  // eslint-disable-line
-      yield put({ type: 'save' });
+      yield put({ type: 'SaveItem' });
     },
+    * select_item ({ payload }, { call, put }) {
+      yield put({type: 'SaveItem', payload});
+    }
   },
 
   reducers: {
-    save(state, action) {
+    SaveItem(state, action) {
       return { ...state, ...action.payload };
     },
   },
