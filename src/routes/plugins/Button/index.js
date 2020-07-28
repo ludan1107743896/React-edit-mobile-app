@@ -5,8 +5,9 @@ export default {
     props: {
         type: 'primary',
         content: '确认',
+        size: "large",
         style: {
-            margin: "0px 10px 0px 0px"
+            width: "100%"
         }
     } 
 }

@@ -4,7 +4,7 @@ export default {
   state: {
     selectItem: {},
     visourDomArray: [],
-    parentPath: ''
+    parentPath: '[0]'
   },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line

@@ -17,6 +17,7 @@ class SideLeftCompnent extends React.Component{
                 selectItem: {
                     ...pluginsArray[event],
                     key: v4(),
+                    children: [],
                 }
             }
         })
