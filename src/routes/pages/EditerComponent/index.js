@@ -55,10 +55,12 @@ class EditerComponent extends React.Component{
         }
         const getVisour = (list) => {
             return list.map((k,i) => {
-                if(k.children.length > 0){
-                    return getRenderTree(k) 
-                } else {
-                    return getRenderTree(k,'content')
+                if (k!==null) {
+                    if(k.children.length > 0){
+                        return getRenderTree(k) 
+                    } else {
+                        return getRenderTree(k,'content')
+                    }
                 }
             })
         }
