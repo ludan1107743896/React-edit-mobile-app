@@ -13,24 +13,37 @@ class EditerComponent extends React.Component{
        
     }
 
-    getPath = (path, index, flag) => {
-        if (path) {
-            if (path.includes('children') || flag) {
-                return `${path}.children[${index}]`;
-            } else {
-                return `[${index}]`;
-            }
+    getPath = (path, index, isContainer) => {
+        if(!path && index !== undefined && !isContainer){
+            path = `[${index}]`
+        } else if (path && isContainer) {
+            path = `${path}.children`;
+        } else if (path && index !== undefined) {
+            path = `${path}.children.[${index}]`
         }
+        return path;
     }
 
     handleOnDrop = (event) => {
         event.preventDefault();
         const { selectItem, visourDomArray, parentPath } = this.props.example;
-        const index = parentPath == '[0]'? visourDomArray.length: _.get(visourDomArray, parentPath).children.length;
+        const index = parentPath == ''? visourDomArray.length: _.get(visourDomArray, parentPath).children.length;
         const path = this.getPath(parentPath, index);
-        _.update(visourDomArray, path, () => {
-            return {...selectItem, path};
-        });
+        if (!path.includes('children')) {
+            visourDomArray.push({
+                ...selectItem, 
+                path, 
+                parentPath
+            });
+        } else {
+            _.update(visourDomArray, path, () => {   
+                return {
+                    ...selectItem, 
+                    path,
+                    parentPath,
+                }
+            });
+        }
         this.forceUpdate();
     }
 
@@ -40,18 +53,20 @@ class EditerComponent extends React.Component{
 
     GetListView = () => {
         const { visourDomArray } = this.props.example;
+        console.log(visourDomArray, '-------visourDomArray----')
         if(visourDomArray.length <= 0) return null;
         const getVisour = (list) => {
             return list.map((k,i) => {
                 if(k.children.length > 0){
                     return getVisour(k.children)
+                } else {
+                    return React.createElement(mobileComps[k.type], {
+                        ...k.props,
+                        key: k.key,
+                        onClick: () => this.handleClick(k),
+                        onMouseOver: () => this.handleMouseOver(k),
+                    }, k.props.content?k.props.content:null)
                 }
-                return React.createElement(mobileComps[k.type], {
-                    ...k.props,
-                    key: k.key,
-                    onClick: () => this.handleClick(k),
-                    onMouseOver: () => this.handleMouseOver(k),
-                }, k.props.content?k.props.content:null)
             })
         }
         return getVisour(visourDomArray);
@@ -61,7 +76,7 @@ class EditerComponent extends React.Component{
         const { parentPath } = this.props.example;
         let path = '';
         if (k.container) {
-            path = this.getPath(k.path, k.children.length, true)
+            path = k.path;
         } else {
             path = parentPath;
         }

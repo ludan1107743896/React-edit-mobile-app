@@ -4,7 +4,7 @@ export default {
   state: {
     selectItem: {},
     visourDomArray: [],
-    parentPath: '[0]',
+    parentPath: '',
     selectEidtComp: {}
   },
   subscriptions: {

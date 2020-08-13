@@ -26,3 +26,29 @@ _.get(visourDomArray, selectEidtComp.path, (item) => {
 })
 
 ```
+
+```jsx
+    const a = this.getPath('', 0, true);
+    const a1 = this.getPath('', 0, false);
+    const b = this.getPath('[0]', 1, true); // 获取二层值
+    const b1 = this.getPath('[0]', 1, false); // 获取二层值
+    const c = this.getPath('', 2); // 获取第一层path
+    const c1 = this.getPath('', 2, true);
+    console.log(a,'-------------', a1, 'a')
+    console.log(b,'-------------', b1, 'b')
+    console.log(c,'-------------', c1, 'c')
+
+    // 获取当前路径
+
+    const getPath = (path, index, isContainer) => {
+        if(!path && index !== undefined && !isContainer){
+            path = `[${index}]`
+        } else if (path && isContainer) {
+            path = `${path}.children`;
+        } else if (path && index !== undefined) {
+            path = `${path}.children.[${index}]`
+        }
+        return path;
+    }
+
+```
