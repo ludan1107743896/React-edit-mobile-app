@@ -1,5 +1,7 @@
 {
   "private": true,
+  "version": "0.0.1",
+  "author": "ludan",
   "scripts": {
     "start": "roadhog server",
     "build": "roadhog build",
