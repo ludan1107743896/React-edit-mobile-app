@@ -3,6 +3,7 @@ import styles from '../IndexPage.css';
 import { connect } from 'dva';
 import _ from 'lodash';
 import * as mobileComps from 'antd-mobile';
+import { GetPath } from '../../../utils';
 
 class EditerComponent extends React.Component{
     constructor(props) {
@@ -13,22 +14,11 @@ class EditerComponent extends React.Component{
        
     }
 
-    getPath = (path, index, isContainer) => {
-        if(!path && index !== undefined && !isContainer){
-            path = `[${index}]`
-        } else if (path && isContainer) {
-            path = `${path}.children`;
-        } else if (path && index !== undefined) {
-            path = `${path}.children.[${index}]`
-        }
-        return path;
-    }
-
     handleOnDrop = (event) => {
         event.preventDefault();
         const { selectItem, visourDomArray, parentPath } = this.props.example;
         const index = parentPath == ''? visourDomArray.length: _.get(visourDomArray, parentPath).children.length;
-        const path = this.getPath(parentPath, index);
+        const path = GetPath(parentPath, index);
         if (!path.includes('children')) {
             visourDomArray.push({
                 ...selectItem, 
