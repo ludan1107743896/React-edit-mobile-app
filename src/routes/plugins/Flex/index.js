@@ -10,7 +10,7 @@ export default {
         style: {
             width: "100%",
             border: '1px dashed #000',
-            height: '4rem',
+            minHeight: '4rem',
             padding: '0.1rem'
         }
     } 

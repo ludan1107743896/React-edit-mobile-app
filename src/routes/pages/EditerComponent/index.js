@@ -43,19 +43,22 @@ class EditerComponent extends React.Component{
 
     GetListView = () => {
         const { visourDomArray } = this.props.example;
-        console.log(visourDomArray, '-------visourDomArray----')
         if(visourDomArray.length <= 0) return null;
+        const getRenderTree = (k, type) => {
+            const content = k.props.content?k.props.content:null;
+            return React.createElement(mobileComps[k.type], {
+                ...k.props,
+                key: k.key,
+                onClick: () => this.handleClick(k),
+                onMouseOver: () => this.handleMouseOver(k),
+            }, type ? content : getVisour(k.children))
+        }
         const getVisour = (list) => {
             return list.map((k,i) => {
                 if(k.children.length > 0){
-                    return getVisour(k.children)
+                    return getRenderTree(k) 
                 } else {
-                    return React.createElement(mobileComps[k.type], {
-                        ...k.props,
-                        key: k.key,
-                        onClick: () => this.handleClick(k),
-                        onMouseOver: () => this.handleMouseOver(k),
-                    }, k.props.content?k.props.content:null)
+                    return getRenderTree(k,'content')
                 }
             })
         }
