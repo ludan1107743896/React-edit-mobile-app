@@ -47,9 +47,9 @@ class EditerComponent extends React.Component{
         const getRenderTree = (k, type) => {
             const content = k.props.content?k.props.content:null;
             return React.createElement(mobileComps[k.type], {
-                ...k.props,
+                ...k.props, 
                 key: k.key,
-                onClick: () => this.handleClick(k),
+                onClick: (e) => this.handleClick(e,k),
                 onMouseOver: () => this.handleMouseOver(k),
             }, type ? content : getVisour(k.children))
         }
@@ -65,7 +65,8 @@ class EditerComponent extends React.Component{
         return getVisour(visourDomArray);
     }
 
-    handleClick = (k) => {
+    handleClick = (e, k) => {
+        e.stopPropagation()
         const { parentPath } = this.props.example;
         let path = '';
         if (k.container) {
