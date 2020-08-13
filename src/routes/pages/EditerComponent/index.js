@@ -10,10 +10,7 @@ class EditerComponent extends React.Component{
     }
 
     componentDidMount() {
-        // console.log(mobileComps, '---------mobileComps------')
-        // var a = [{name: 'zhangsan', child: [{name: 'lisi', child: [{ name: 'wangwu', child:[] }]}]}]
-        // var c = _.get(a, '[0]');
-        // console.log(c, '----c----')
+       
     }
 
     getPath = (path, index, flag) => {
@@ -53,6 +50,7 @@ class EditerComponent extends React.Component{
                     ...k.props,
                     key: k.key,
                     onClick: () => this.handleClick(k),
+                    onMouseOver: () => this.handleMouseOver(k),
                 }, k.props.content?k.props.content:null)
             })
         }
@@ -63,18 +61,21 @@ class EditerComponent extends React.Component{
         const { parentPath } = this.props.example;
         let path = '';
         if (k.container) {
-            console.log(this.getPath(k.path, k.children.length, true), '-----path----')
             path = this.getPath(k.path, k.children.length, true)
         } else {
             path = parentPath;
         }
-        console.log(path, '-----1111---')
         this.props.dispatch({
-            type: 'example/SaveItem',
+            type: 'example/SaveItem',   
             payload: {
                 parentPath: path,
+                selectEidtComp: k,
             }
         })
+    }
+
+    handleMouseOver = (k) => {
+        // const { visourDomArray, parentPath } = this.props.example;
     }
 
     render() {

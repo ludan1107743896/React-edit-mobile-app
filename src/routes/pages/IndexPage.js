@@ -4,7 +4,7 @@ import styles from './IndexPage.css';
 import { Row, Col } from 'antd'
 import SideLeftCompnent from './SideLeftCompnent/index';
 import EditerComponent  from './EditerComponent/index';
-
+import PropsEditComponent from './PropsEditComponent/index';
 function IndexPage() {
   return (
     <div className={styles.normal}>
@@ -19,6 +19,7 @@ function IndexPage() {
         </Col>
         <Col span={8} className={styles.box_col}>
           <h2>组件属性编辑区</h2>
+          <PropsEditComponent />
         </Col>
       </Row>
 

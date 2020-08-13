@@ -4,7 +4,8 @@ export default {
   state: {
     selectItem: {},
     visourDomArray: [],
-    parentPath: '[0]'
+    parentPath: '[0]',
+    selectEidtComp: {}
   },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
