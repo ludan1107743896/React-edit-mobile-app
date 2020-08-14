@@ -23,30 +23,38 @@ class PropsEditComponent extends React.Component {
                 }
             })            
         } else if (type == 'copy' && selectEidtComp!= {}) {
-            // const _path = selectEidtComp.parentPath;
-            // let _index;
-            // if (_path == '') {
-            //     _index = visourDomArray.length;
-            // } else {
-            //     _index = _.get(visourDomArray,_path).length;
-            // }
-            // console.log(_path, 'mmm121245')
-            // const _index = _.get(visourDomArray, _path);
-            // console.log(_index, 'index')
-            // console.log(_path, '----path----') 
-            // key: v4(),
-            // children: [],
-            // _.update(visourDomArray, _path, (item) => {
-            //     return {}
-            // })
-            // this.props.dispatch({
-            //     type: 'example/SaveItem',
-            //     payload: {
-            //         visourDomArray,
-            //         selectEidtComp: {},
-            //         parentPath: selectEidtComp.parentPath, 
-            //     }
-            // })    
+            const { selectEidtComp } = this.props.example;
+            const nowPath = selectEidtComp.parentPath;
+            let _path = ''; // 新 copy 值的 path 
+            if (nowPath == '') {
+                _path = GetPath('', visourDomArray.length + 1)
+            } else {
+                _path = GetPath(nowPath, _.get(visourDomArray, nowPath).children.length + 1)
+            }
+            _.update(visourDomArray, _path, () => {
+                return {
+                    ...selectEidtComp,
+                    key: v4(),
+                    path: _path,
+                }
+            })
+            this.props.dispatch({
+                type: 'example/SaveItem',
+                payload: {
+                    visourDomArray,
+                    selectEidtComp, 
+                }
+            })
+        } else if (type == 'set') {
+            this.props.dispatch({
+                type: 'example/SaveItem',
+                payload: {
+                    visourDomArray: [],
+                    selectEidtComp: {},
+                    parentPath: '',
+                    selectEidtComp: {}
+                }
+            })
         }
     }
 
@@ -65,7 +73,7 @@ class PropsEditComponent extends React.Component {
                                 {isShow ? <Button style={{width: '88px'}} type="primary" onClick={() => this.handleClickOption('copy')}>复制</Button>:null}
                             </Col>
                             <Col span={8} style={{textAlign: "center"}}>
-                                <Button style={{width: '88px'}} type="primary">重置</Button>
+                                <Button style={{width: '88px'}} type="primary" onClick={() => this.handleClickOption('set')}>重置</Button>
                             </Col>
                         </Row>
                     </Panel>
