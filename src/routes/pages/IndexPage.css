@@ -33,8 +33,10 @@
 }
 
 .editor {
-  background: #ddd;
+  background: url("../../assets/1.jpg") repeat;
   height: calc(90% - 42.8px);
   width: 80%;
   margin: 0 auto;
+  border: 2px dashed #ddd;
+  box-shadow: 10px 10px 5px #ddd;
 }
