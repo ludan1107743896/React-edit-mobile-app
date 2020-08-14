@@ -8,7 +8,12 @@ import BasePropsComp from './BasePropsComp';
 
 const Panel = Collapse.Panel;
 class PropsEditComponent extends React.Component {
-
+    constructor(props) {
+        super(props);
+        this.state={
+            FullScreenVisible: false
+        }
+    }
     handleClickOption = (type) => {
         const { visourDomArray, selectEidtComp, parentPath } = this.props.example;
         if(type == 'delete' && selectEidtComp!= {}){
@@ -59,6 +64,33 @@ class PropsEditComponent extends React.Component {
         }
     }
 
+    handleFullScreen = () => {
+        let element = document.documentElement;
+        if (this.state.FullScreenVisible) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        } else {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.webkitRequestFullScreen) {
+                element.webkitRequestFullScreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.msRequestFullscreen) {
+                // IE11
+                element.msRequestFullscreen();
+            }
+        }
+        this.setState({FullScreenVisible: !this.state.FullScreenVisible})
+    } 
+
     render() {
         const { selectEidtComp } = this.props.example;
         const isShow = selectEidtComp != {};
@@ -67,14 +99,19 @@ class PropsEditComponent extends React.Component {
                 <Collapse defaultActiveKey={['0', "1"]} style={{ textAlign: "left" }}>
                     <Panel header={"基本操作"} key={0}>
                         <Row>
-                            <Col span={8} style={{textAlign: "center"}}>
+                            <Col span={6} style={{textAlign: "center"}}>
                                 {isShow ? <Button style={{width: '88px'}} type="primary" onClick={() => this.handleClickOption('delete')}>删除</Button>:null}
                             </Col>
-                            <Col span={8} style={{textAlign: "center"}}>
+                            <Col span={6} style={{textAlign: "center"}}>
                                 {isShow ? <Button style={{width: '88px'}} type="primary" onClick={() => this.handleClickOption('copy')}>复制</Button>:null}
                             </Col>
-                            <Col span={8} style={{textAlign: "center"}}>
+                            <Col span={6} style={{textAlign: "center"}}>
                                 <Button style={{width: '88px'}} type="primary" onClick={() => this.handleClickOption('set')}>重置</Button>
+                            </Col>
+                            <Col span={6} style={{textAlign: "center"}}>
+                                <Button style={{width: '88px'}} type="primary" onClick={() => this.handleFullScreen()}>
+                                    {!this.state.FullScreenVisible ? '全屏': "取消全屏"}
+                                </Button>
                             </Col>
                         </Row>
                     </Panel>
