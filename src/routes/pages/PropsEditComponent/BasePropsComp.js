@@ -30,7 +30,7 @@ class BasePropsComp extends React.Component {
     render() {
         return (
             <>
-                <Form style={{ height: '500px', overflow: 'auto' }}>
+                <Form style={{ height: '527px', overflow: 'auto' }}>
                     <Collapse
                         bordered={false}
                         defaultActiveKey={['1', "2", "3", "4", "5", "6"]}
