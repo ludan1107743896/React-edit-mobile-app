@@ -2,6 +2,8 @@ import React from 'react';
 import { Form, Collapse, Input, Row, Col, Select, Popover, InputNumber } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { ChromePicker } from 'react-color';
+import { connect } from 'dva';
+import _ from 'lodash';
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -18,6 +20,7 @@ class BasePropsComp extends React.Component {
             <Select
                 placeholder="单位"
                 style={{ width: '100%' }}
+                defaultValue="px"
             >
                 <Option value="px">px</Option>
                 <Option value="rem">rem</Option>
@@ -27,7 +30,23 @@ class BasePropsComp extends React.Component {
         )
     }
 
-    
+    getEditStyleBody = (_obj, _item) => {
+        const { selectEidtComp } = this.props.example;
+        if(typeof _obj === 'string'){
+            if(_obj === 'className'){
+                selectEidtComp.props.className = _item;
+
+            }
+        } else {
+            selectEidtComp.props.style={...selectEidtComp.props.style, ..._obj}
+        }
+        this.props.dispatch({
+            type: 'example/SaveItem', 
+            payload: {
+                selectEidtComp
+            } 
+        })
+    }
 
     render() {
         return (
@@ -40,7 +59,7 @@ class BasePropsComp extends React.Component {
                         className="site-collapse-custom-collapse"
                     >
                         <Panel header="自定义类名" key="1" >
-                            <Input placeholder="自定义样式" />
+                            <Input placeholder="自定义样式" onChange={(e) => this.getEditStyleBody('className', e.target.value)}/>
                         </Panel>
                         <Panel header="文本与字体" key="2" >
                             <Row style={{ margin: '5px 0' }}>
@@ -48,10 +67,11 @@ class BasePropsComp extends React.Component {
                                     <Select
                                         placeholder="请选择字体"
                                         style={{ width: '100%' }}
+                                        onSelect={(e) => this.getEditStyleBody({ fontFamily: e})}
                                     >
-                                        <Option value="songti">宋体</Option>
-                                        <Option value="heti">黑体</Option>
-                                        <Option value="weruanyahei">微软雅黑</Option>
+                                        <Option value="cursive">宋体</Option>
+                                        <Option value="monospace">黑体</Option>
+                                        <Option value="inherit">微软雅黑</Option>
                                     </Select>
                                 </Col>
                             </Row>
@@ -60,10 +80,15 @@ class BasePropsComp extends React.Component {
                                     <Select
                                         placeholder="请选择字体粗细"
                                         style={{ width: '100%' }}
+                                        onSelect={(e) => this.getEditStyleBody({ fontWeight: e})}
                                     >
                                         <Option value="normal">normal</Option>
                                         <Option value="bold">bold</Option>
                                         <Option value="bolder">bolder</Option>
+                                        <Option value="inherit">inherit</Option>
+                                        <Option value="initial">initial</Option>
+                                        <Option value="lighter">lighter</Option>
+                                        <Option value="unset">unset</Option>
                                     </Select>
                                 </Col>
                                 <Col span={12}>
@@ -377,4 +402,4 @@ class BasePropsComp extends React.Component {
     }
 }
 
-export default BasePropsComp;
+export default connect(({ example }) =>({ example }))(BasePropsComp);
