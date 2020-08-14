@@ -4,6 +4,7 @@ import { connect } from 'dva';
 import _ from 'lodash';
 import { GetPath } from '../../../utils'
 import { v4 } from 'uuid';
+import BasePropsComp from './BasePropsComp';
 
 const Panel = Collapse.Panel;
 class PropsEditComponent extends React.Component {
@@ -63,7 +64,7 @@ class PropsEditComponent extends React.Component {
         const isShow = selectEidtComp != {};
         return (
             <div>
-                <Collapse defaultActiveKey={['0']} style={{ textAlign: "left" }}>
+                <Collapse defaultActiveKey={['0', "1"]} style={{ textAlign: "left" }}>
                     <Panel header={"基本操作"} key={0}>
                         <Row>
                             <Col span={8} style={{textAlign: "center"}}>
@@ -76,6 +77,9 @@ class PropsEditComponent extends React.Component {
                                 <Button style={{width: '88px'}} type="primary" onClick={() => this.handleClickOption('set')}>重置</Button>
                             </Col>
                         </Row>
+                    </Panel>
+                    <Panel header={"基本样式配置"} key={1}>
+                        <BasePropsComp />
                     </Panel>
                 </Collapse>
             </div>
