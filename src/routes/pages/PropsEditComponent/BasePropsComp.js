@@ -27,6 +27,8 @@ class BasePropsComp extends React.Component {
         )
     }
 
+    
+
     render() {
         return (
             <>

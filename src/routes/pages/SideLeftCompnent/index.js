@@ -26,7 +26,7 @@ class SideLeftCompnent extends React.Component{
     render() {
         return (
             <div>
-                <Collapse defaultActiveKey={['0']} style={{ textAlign: "left" }}>
+                <Collapse defaultActiveKey={['1', "2"]} style={{ textAlign: "left" }}>
                     {
                         pluginsArrayTree.map((k, i) => {
                             return <Panel header={k.group_title} key={i + 1}>

@@ -9,7 +9,7 @@ function IndexPage() {
   return (
     <div className={styles.normal}>
       <Row>
-        <Col span={8} className={styles.box_col}>
+        <Col span={8} className={styles.box_col} style={{padding: "0 30px"}}>
           <h2>组件展示区</h2>
           <SideLeftCompnent />
         </Col>
