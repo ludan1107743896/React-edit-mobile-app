@@ -95,7 +95,7 @@ class PropsEditComponent extends React.Component {
         const { selectEidtComp } = this.props.example;
         const isShow = selectEidtComp != {};
         return (
-            <div>
+            <div style={{ padding: '0 10px' }}>
                 <Collapse defaultActiveKey={['0', "1"]} style={{ textAlign: "left" }}>
                     <Panel header={"基本操作"} key={0}>
                         <Row>
