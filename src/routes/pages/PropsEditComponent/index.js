@@ -96,7 +96,7 @@ class PropsEditComponent extends React.Component {
         const isShow = selectEidtComp != {};
         return (
             <div>
-                <Collapse defaultActiveKey={['0', "1"]} style={{ textAlign: "left" }}>
+                <Collapse defaultActiveKey={['0']} style={{ textAlign: "left" }}>
                     <Panel header={"基本操作"} key={0}>
                         <Row>
                             <Col span={6} style={{textAlign: "center"}}>
