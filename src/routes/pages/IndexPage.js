@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
-import { Row, Col, Tabs } from 'antd'
+import { Row, Col, Tabs, Button, Modal } from 'antd'
 import SideLeftCompnent from './SideLeftCompnent/index';
 import EditerComponent from './EditerComponent/index';
 import PropsEditComponent from './PropsEditComponent/index';
+import GenerateCode from './GenerateCode/index';
 
 const { TabPane } = Tabs;
 const PropsNull = () => {
@@ -15,13 +16,14 @@ const PropsNull = () => {
 
 
 class IndexPage extends React.Component {
-
-  callback = () => {
-
+  constructor(props) {
+    super(props);
+    this.state={
+      visible: false,
+    }
   }
-
   render() {
-    const { selectEidtComp } = this.props.example;
+    const { selectEidtComp, visourDomArray } = this.props.example;
     return (
       <div className={styles.normal}>
         <Row>
@@ -34,12 +36,21 @@ class IndexPage extends React.Component {
             <EditerComponent />
           </Col>
           <Col span={8} className={styles.box_col}>
-            <Tabs animated={true} centered defaultActiveKey="1" onChange={this.callback}>
+            <Tabs animated={true} centered defaultActiveKey="1">
               <TabPane tab="组件属性编辑区" key="1">
                 {JSON.stringify(selectEidtComp) !== "{}" ? <PropsEditComponent /> : <PropsNull />}
               </TabPane>
               <TabPane tab="组件代码展示操作" key="2">
-                121212
+                <Button type="primary" onClick={() => this.setState({visible: true})}>查看代码</Button>
+                <Modal
+                  title="代码Code"
+                  visible={this.state.visible}
+                  onCancel={() => this.setState({visible: false})}
+                  width={1000}
+                  footer={null}
+                >
+                  <GenerateCode visourDomArray={visourDomArray} />
+                </Modal>
               </TabPane>
             </Tabs>            
           </Col>
