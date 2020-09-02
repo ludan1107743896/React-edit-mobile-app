@@ -37,7 +37,7 @@ class SideLeftCompnent extends React.Component{
                                     k.coms.map((com, vx) => {
                                         return (
                                             <Tag
-                                                style={{ border: '0' }}
+                                                style={{ border: '0' , margin: '5px 0'}}
                                                 key={i + '' + vx}
                                             >
                                                 <Button 

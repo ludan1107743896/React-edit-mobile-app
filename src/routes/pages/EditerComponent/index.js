@@ -45,7 +45,8 @@ class EditerComponent extends React.Component{
     GetListView = () => {
         const { visourDomArray } = this.props.example;
         if(visourDomArray.length <= 0) return null;
-        const getRenderTree = (k, type) => {
+
+        const commonCreateComp = (k, type) => {
             const content = k.props.content?k.props.content:null;
             return React.createElement(mobileComps[k.type], {
                 ...k.props, 
@@ -54,6 +55,12 @@ class EditerComponent extends React.Component{
                 onMouseOver: () => this.handleMouseOver(k),
             }, type ? content : getVisour(k.children))
         }
+
+        const getRenderTree = (k, type) => {
+            // const content = k.props.content?k.props.content:null;
+            return commonCreateComp(k, type);
+        }
+
         const getVisour = (list) => {
             return list.map((k,i) => {
                 if (k!==null) {
