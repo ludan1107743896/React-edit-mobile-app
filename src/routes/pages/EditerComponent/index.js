@@ -103,6 +103,7 @@ class EditerComponent extends React.Component{
                 className={styles.editor} 
                 onDrop={(e) => this.handleOnDrop(e)} 
                 onDragOver={(e) => this.handleOnDragOver(e)} 
+                style={{position: 'relative'}}
             >
                 {this.GetListView()}
             </div>
