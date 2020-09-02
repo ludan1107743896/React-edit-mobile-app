@@ -1,3 +1,6 @@
+/**
+ * 左边侧边栏，组件区域
+ */
 import React from 'react';
 import { Collapse, Tag, Button} from 'antd';
 import { v4 } from 'uuid';

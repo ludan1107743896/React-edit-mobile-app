@@ -1,3 +1,4 @@
+// 基本属性编辑区
 import React from 'react';
 import { Form, Collapse, Input, Row, Col, Select, Popover, InputNumber } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';

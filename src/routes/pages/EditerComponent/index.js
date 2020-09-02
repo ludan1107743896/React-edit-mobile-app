@@ -1,3 +1,4 @@
+// 代码合成区
 import React from 'react';
 import styles from '../IndexPage.css';
 import { connect } from 'dva';
